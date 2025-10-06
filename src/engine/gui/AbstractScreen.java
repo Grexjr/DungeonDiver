@@ -11,6 +11,9 @@ public abstract class AbstractScreen implements Displayable, Outputable{
     public AbstractScreen(){
         this.containerPanel = new JPanel();
         this.layout = GUIConstants.SCREEN_DEFAULT_LAYOUT;
+
+        // Initialize the panel
+        this.containerPanel.setLayout(this.layout);
     }
 
     //
@@ -53,4 +56,31 @@ public abstract class AbstractScreen implements Displayable, Outputable{
         this.layout = newLayout;
         this.containerPanel.setLayout(this.layout);
     }
+
+    public void addComponent(AbstractPanel panel, Object constraints){
+        LayoutManager layout = this.getContainerPanel().getLayout();
+
+        if(layout instanceof BorderLayout){
+            if(!(constraints instanceof String)){
+                throw new IllegalArgumentException("BorderLayout expects a String!"); // DEBUG
+            }
+        } else if (layout instanceof GridBagLayout){
+            if(!(constraints instanceof GridBagConstraints)){
+                throw new IllegalArgumentException("GridBagLayout expects GridBagConstraints!"); //DEBUG
+            }
+        } else if (layout instanceof FlowLayout || layout instanceof GridLayout || layout instanceof BoxLayout){
+            if(constraints != null){
+                throw new IllegalArgumentException(layout.getClass().getSimpleName() + " does not accept constraints!");
+            }
+        }
+
+        System.out.println("Parent: " + this.getContainerPanel());
+        System.out.println("Child: " + panel.getContainerPanel());
+        if(this.getContainerPanel().equals(panel.getContainerPanel())){
+            throw new IllegalArgumentException("FATAL FATAL FATAL");
+        }
+        this.getContainerPanel().add(panel.getContainerPanel(),constraints);
+        //refresh();
+    }
+
 }

@@ -1,6 +1,7 @@
 package engine.gui;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,8 +11,8 @@ public abstract class AbstractButton extends AbstractGUIComponent implements Inp
         super(new JButton());
 
         // Initializing the button
-        this.getComponent().setText(super.getText());
         this.getComponent().addActionListener(addAction());
+        //this.getComponent().setPreferredSize(new Dimension(GUIConstants.BUTTON_DEFAULT_SIZE[0],GUIConstants.BUTTON_DEFAULT_SIZE[1]));
     }
 
     //
@@ -20,7 +21,7 @@ public abstract class AbstractButton extends AbstractGUIComponent implements Inp
     @Override
     public final void setText(String newText) {
         this.getComponent().setText(newText);
-        refresh();
+        //refresh();
     }
 
     @Override
@@ -33,14 +34,14 @@ public abstract class AbstractButton extends AbstractGUIComponent implements Inp
     public final void setWidth(int newWidth){
         super.setWidth(newWidth);
         getComponent().setSize(getWidth(),getHeight());
-        refresh();
+        //refresh();
     }
 
     @Override
     public final void setHeight(int newHeight){
         super.setHeight(newHeight);
         getComponent().setSize(getWidth(),getHeight());
-        refresh();
+        //refresh();
     }
 
     @Override

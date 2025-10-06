@@ -7,14 +7,13 @@ public class DefaultScreen extends AbstractScreen{
     }
 
     @Override
-    public void onCreate(){
-        this.show();
-        System.out.println("Created!");
+    public void onCreate(){;
+        System.out.println("Default Screen created!");
     }
 
     @Override
     public void onDestroy(){
-        System.out.println("Destroyed!");
+        System.out.println("Default screen destroyed!");
     }
 
 }

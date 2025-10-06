@@ -11,6 +11,8 @@ public class GUIConstants {
 
     protected static final String COMPONENT_DEFAULT_TEXT = "DEFAULT_COMPONENT";
 
+    protected static final int[] BUTTON_DEFAULT_SIZE = {40,50};
+
     protected static final int[] TEXT_DISPLAY_DEFAULT_SIZE = {35,40};
 
 }
