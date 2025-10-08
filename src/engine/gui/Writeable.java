@@ -7,4 +7,6 @@ public interface Writeable {
     void setText(String newText);
     void replaceText(String text, int start, int end);
 
+    void slowWrite(String text);
+
 }

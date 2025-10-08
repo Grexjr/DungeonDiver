@@ -74,13 +74,13 @@ public abstract class AbstractScreen implements Displayable, Outputable{
             }
         }
 
-        System.out.println("Parent: " + this.getContainerPanel());
+        /*System.out.println("Parent: " + this.getContainerPanel());
         System.out.println("Child: " + panel.getContainerPanel());
         if(this.getContainerPanel().equals(panel.getContainerPanel())){
             throw new IllegalArgumentException("FATAL FATAL FATAL");
-        }
+        }*/
         this.getContainerPanel().add(panel.getContainerPanel(),constraints);
-        //refresh();
+        refresh();
     }
 
 }

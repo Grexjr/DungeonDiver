@@ -13,6 +13,11 @@ public class GUIConstants {
 
     protected static final int[] BUTTON_DEFAULT_SIZE = {40,50};
 
-    protected static final int[] TEXT_DISPLAY_DEFAULT_SIZE = {35,40};
+    protected static final int[] TEXT_DISPLAY_DEFAULT_SIZE = {75,50};
+    protected static final int TEXT_WRITE_DELAY = 50;
+
+    protected static final String LABEL_DEFAULT_TEXT = "DEFAULT_LABEL";
+
+    protected static final int TEXT_FIELD_DEFAULT_SIZE = 30;
 
 }

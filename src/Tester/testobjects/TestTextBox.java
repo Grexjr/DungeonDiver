@@ -6,7 +6,7 @@ public class TestTextBox extends AbstractTextDisplayBox {
 
     @Override
     public void onCreate() {
-        write("Hello World!");
+        write("Hello World!\n");
     }
 
     @Override

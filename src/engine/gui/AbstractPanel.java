@@ -45,7 +45,10 @@ public abstract class AbstractPanel implements Displayable, Outputable, InputLis
 
     public LayoutManager getLayout(){return this.layout;}
 
-    public void setLayout(LayoutManager newLayout){this.layout = newLayout;}
+    public void setLayout(LayoutManager newLayout){
+        this.layout = newLayout;
+        this.containerPanel.setLayout(this.layout);
+    }
 
 
     public void addComponent(AbstractGUIComponent component, Object constraints){
@@ -65,13 +68,13 @@ public abstract class AbstractPanel implements Displayable, Outputable, InputLis
             }
         }
 
-        System.out.println("Parent: " + this.getContainerPanel());
+        /*System.out.println("Parent: " + this.getContainerPanel());
         System.out.println("Child: " + component.getComponent());
         if(this.getContainerPanel().equals(component.getComponent())){
             throw new IllegalArgumentException("FATAL FATAL FATAL");
-        }
+        }*/
         this.getContainerPanel().add(component.getComponent(),constraints);
-        //refresh();
+        refresh();
     }
 
     @Override

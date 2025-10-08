@@ -12,7 +12,11 @@ public abstract class AbstractButton extends AbstractGUIComponent implements Inp
 
         // Initializing the button
         this.getComponent().addActionListener(addAction());
-        //this.getComponent().setPreferredSize(new Dimension(GUIConstants.BUTTON_DEFAULT_SIZE[0],GUIConstants.BUTTON_DEFAULT_SIZE[1]));
+        int defaultWidth = GUIConstants.BUTTON_DEFAULT_SIZE[0];
+        int defaultHeight = GUIConstants.BUTTON_DEFAULT_SIZE[1];
+        this.getComponent().setPreferredSize(new Dimension(defaultWidth,defaultHeight));
+        setWidth(defaultWidth);
+        setHeight(defaultHeight);
     }
 
     //
@@ -33,8 +37,8 @@ public abstract class AbstractButton extends AbstractGUIComponent implements Inp
     @Override
     public final void setWidth(int newWidth){
         super.setWidth(newWidth);
-        getComponent().setSize(getWidth(),getHeight());
-        //refresh();
+        getComponent().setPreferredSize(new Dimension(getWidth(),getHeight()));
+        refresh();
     }
 
     @Override
@@ -59,5 +63,10 @@ public abstract class AbstractButton extends AbstractGUIComponent implements Inp
     //
     @Override
     protected final JButton getComponent(){return (JButton) super.getComponent();}
+
+    public final void addLabel(AbstractLabel label){
+        getComponent().add(label.getComponent());
+        refresh();
+    }
 
 }

@@ -1,6 +1,7 @@
 package engine.gui;
 
 import javax.swing.*;
+import java.awt.*;
 
 public abstract class AbstractTextDisplayBox extends AbstractGUIComponent implements Writeable{
 
@@ -18,9 +19,10 @@ public abstract class AbstractTextDisplayBox extends AbstractGUIComponent implem
         this.textbox.setRows(this.rows);
         this.textbox.setLineWrap(true);
         this.textbox.setEditable(false);
-        getComponent().setFocusable(false);
+        this.textbox.setFocusable(false);
 
         getComponent().setViewportView(this.textbox);
+        getComponent().setPreferredSize(this.textbox.getPreferredSize());
     }
 
     //
@@ -29,29 +31,45 @@ public abstract class AbstractTextDisplayBox extends AbstractGUIComponent implem
     @Override
     public final void setText(String newText) {
         this.textbox.setText(newText);
-        //refresh();
+        refresh();
         scrollDown();
     }
 
     @Override
     public final void write(String text) {
         this.textbox.append(text);
-        //refresh();
+        refresh();
         scrollDown();
     }
 
     @Override
     public final void erase(int start, int end) {
         this.textbox.replaceRange("",start,end);
-        //refresh();
+        refresh();
         scrollDown();
     }
 
     @Override
     public final void replaceText(String text, int start, int end) {
         this.textbox.replaceRange(text,start,end);
-        //refresh();
+        refresh();
         scrollDown();
+    }
+
+    @Override
+    public final void slowWrite(String text) {
+        char[] textArray = text.toCharArray();
+        for(int i = 0; i < textArray.length; i++){
+            write(String.valueOf(textArray[i]));
+            try {
+                Thread.sleep(GUIConstants.TEXT_WRITE_DELAY);
+            } catch(InterruptedException e){
+                e.printStackTrace();
+            }
+            if(i == textArray.length - 1){
+                write("\n");
+            }
+        }
     }
 
     //
@@ -74,21 +92,21 @@ public abstract class AbstractTextDisplayBox extends AbstractGUIComponent implem
     @Override
     public final int getHeight(){return this.rows;}
 
-    /*@Override
+    @Override
     public final void setWidth(int columns){
         this.columns = columns;
-        this.getComponent().setColumns(columns);
-        //refresh();
+        this.textbox.setColumns(this.columns);
+        refresh();
         refreshScroller();
     }
 
     @Override
     public final void setHeight(int rows){
         this.rows = rows;
-        this.getComponent().setRows(rows);
-        //refresh();
+        this.textbox.setRows(this.rows);
+        refresh();
         refreshScroller();
-    }*/
+    }
 
     //
     // Class methods
@@ -103,7 +121,7 @@ public abstract class AbstractTextDisplayBox extends AbstractGUIComponent implem
         SwingUtilities.invokeLater(() -> {
             JScrollBar scroller = getComponent().getVerticalScrollBar();
             scroller.setValue(scroller.getMaximum());
-            //refresh();
+            refresh();
             //refreshScroller();}
         });
     }

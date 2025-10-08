@@ -21,24 +21,22 @@ public class Tester {
         button.init();
 
         window.setScreen(screen);
-        window.refresh();
 
         System.out.println("ADDING TEXT PANEL");
         screen.addComponent(textPanel, BorderLayout.NORTH);
 
         System.out.println("ADDING BUTTON PANEL");
         screen.addComponent(buttonPanel,BorderLayout.SOUTH);
-        screen.refresh();
 
         System.out.println("ADDING TEXT BOX");
-        textPanel.addComponent(textBox,BorderLayout.CENTER);
-        textPanel.refresh();
+        textPanel.addComponent(textBox,null);
 
         System.out.println("ADDING BUTTON");
-        buttonPanel.addComponent(button,BorderLayout.CENTER);
-        buttonPanel.refresh();
+        buttonPanel.addComponent(button,null);
 
         window.show();
+
+        textBox.slowWrite("What is your name?");
 
 
 
